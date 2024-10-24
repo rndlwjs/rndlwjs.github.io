@@ -17,7 +17,7 @@ minimal_mistakes_skin    : "default" # "air", "aqua", "contrast", "dark", "dirt"
 # Site Settings
 locale                   : "ko"
 rtl                      : # true, false (default) # turns direction of the page into right to left for RTL languages
-title                    : "Studying AI"
+title                    : "Studying Language & AI"
 title_separator          : "-"
 subtitle                 : # site tagline that appears below site title in masthead
 name                     : "김규진 Kyujin Kim"
@@ -115,7 +115,7 @@ analytics:
 author:
   name             : "김규진 (Kyujin Kim)"
   avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio              : "Interested in Speech, NLP"
+  bio              : "Majored in Linguistics, currently finding positions in AI engineer"
   location         : "Seoul, Korea"
   email            :
   links:
@@ -123,8 +123,8 @@ author:
       icon: "fas fa-fw fa-envelope-square"
       url: "mailto:rndlwjs@gmail.com"
     - label: "Website"
-      icon: "fas fa-fw fa-link"
-      # url: "https://your-website.com"
+      icon: "fas fa-fw fa-linkedin"
+      url: "https://www.linkedin.com/in/rndlwjs/"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
       url: "https://github.com/rndlwjs"
@@ -135,8 +135,8 @@ footer:
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
       url: "https://github.com/rndlwjs"
-    - label: "Link"
-      icon: "fab fa-fw fa-instagram"
+    - label: "Linkedin"
+      icon: "fab fa-fw fa-Linkedin"
       url: "https://www.linkedin.com/in/rndlwjs/"
 
 
