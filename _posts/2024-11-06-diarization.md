@@ -28,3 +28,23 @@ Wang은 AHC 방법을 일반적인 방법이라 소개하였다. AHC는 max-heap
 
 Spectral clustering을 가장 좋은 unsupervised 방법이라 소개한다. 이는 graph-cut 문제와 유사하며, (Wang et al., 2017)은 4가지 절차를 도입한 방법을 제안하고 있다.
 
+```
+# input의 모양은 (n__samples, n_feature)이다. 
+# 다음은 400개 음성 collar, 192차원 임베딩을 가정한 예시이다.
+matrix = np.array([[1.0] * 192] * 400)
+
+labels = configs.icassp2018_clusterer.predict(matrix)
+expected = np.array([0] * 100 + [1] * 100 + [2] * 100 + [3] * 100)
+
+print(np.testing.assert_equal(expected, labels))
+```
+
+Wang et al. 에서 주장한 군집화 방법, *icassp2018_clusterer.predict()* 은 다음과 같은 순서로 진행된다.
+
+```
+1. affinity matrix
+2. refinement operations
+3. eigen decomposition of Laplacian matrix
+4. Determine number of clusters via eigen-gap
+5. K-means on eigen-vectors
+```
