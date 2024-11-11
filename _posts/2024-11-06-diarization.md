@@ -1,10 +1,13 @@
 ---
 layout: single
-title: '[Review] Studies of Speaker Diarization by Quan Wang'
+title: '[review] Studies of Speaker Diarization by Quan Wang'
 categories: 'Speaker'
+use_math: true
 ---
 
-본 포스트는 **Udemy** 유료강의 **A Tutorial on Speaker Diarization**을 보고 정리한 내용이다. 2017-2020년 전후 내용을 다루고 있어 최신 연구와 거리가 있을 수 있지만, 기본적인 이해를 위해 포스트를 정리한다.
+본 포스트는 **Udemy** 유료강의 **A Tutorial on Speaker Diarization**을 보고 정리한 내용이다.
+
+2017-2020년 전후 내용을 다루고 있어 최신 연구와 거리가 있을 수 있지만, 기본적인 이해를 위해 포스트를 정리한다.
 
 ```Speaker diarization을 한마디로 표현하면 "Who Spoke When"을 검출하는 기법이다.```
 
