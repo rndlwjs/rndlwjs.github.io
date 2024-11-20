@@ -7,6 +7,8 @@ use_math: true
 
 본 포스트는 **Udemy** 유료강의 **A Tutorial on Speaker Diarization**을 보고 정리한 내용이다.
 
+![slide](../assets/images/2024-11-20-SD_slide1.jpg)
+
 2017-2020년 전후 내용을 다루고 있어 최신 연구와 거리가 있을 수 있지만, 기본적인 이해를 위해 포스트를 정리한다.
 
 ```Speaker diarization을 한마디로 표현하면 "Who Spoke When"을 검출하는 기법이다.```
