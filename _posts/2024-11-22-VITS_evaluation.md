@@ -24,6 +24,9 @@ wav format with 48KHz 16bit
 Titan-Xp GPU 기준, 1h/epoch
 음성파일
 
+
+https://drive.google.com/drive/folders/1osLfIye7XqybgXssSfZQYU4OQKzeRcTY?usp=sharing
+
 ### 평가
 TTS 평가는 subjective human evaluation (Mean Opinion Score (MOS))으로 이루어진다.
 정량 평가는 논문에 기록되어 있기 때문에, 이번 포스트는 글쓴이의 정성 평가 결과를 공유하고자 한다.
@@ -32,7 +35,7 @@ TTS 평가는 subjective human evaluation (Mean Opinion Score (MOS))으로 이�
 
 1. ChatGPT를 활용하여 CN-TTS 평가 데이터를 100개 문장 구축했다.
 	- TTS가 활용되는 환경을 고려하여, 5가지 상황에 대한 prompt로 중국어 텍스트를 생성했다.
-	- ex) tongue twister, 게임, 뉴스, 일상표현. 
+	- ex. tongue twister, 게임, 영화대사, 일상표현, 뉴스. 
 
 2. Naturalness에 대한 객관적인 평가를 위해 다음과 같은 가이드라인을 세웠다.
 	- 중국어는 성조(tone)이 중요하다. (1-4성)
