@@ -18,11 +18,10 @@ VITS 모델 기반 CN-TTS에 대한 오픈소스가 있어, 이를 직접 훈련
 Chinese Mandarin Female Database
 12 hours
 wav format with 48KHz 16bit
-https://en.data-baker.com/datasets/freeDatasets/
 
 ### 훈련 결과
 100 epochs
-Titan-T 기준, 1h/epoch
+Titan-Xp GPU 기준, 1h/epoch
 음성파일
 
 ### 평가
@@ -32,15 +31,21 @@ TTS 평가는 subjective human evaluation (Mean Opinion Score (MOS))으로 이�
 일반적으로 TTS 결과물의 Naturalness, intelligibility에 대한 평가가 이뤄진다.
 
 1. ChatGPT를 활용하여 CN-TTS 평가 데이터를 100개 문장 구축했다.
-다양한 표현 진행
-1. Naturalness에 대한 객관적인 평가를 위해 다음과 같은 가이드라인을 세웠다.
-- 중국어는 성조(tone)이 중요하다. (1-4성)
-- Tonal system (iambic, trochaic)
-- 동음이의어 (같은 음, 다른 성조)
-- Prosody 확인해야 한다.
-1. Intelligibility는 CN-ASR 모델로 평가를 진행하였다.
+	- TTS가 활용되는 환경을 고려하여, 5가지 상황에 대한 prompt로 중국어 텍스트를 생성했다.
+	- ex) tongue twister, 게임, 뉴스, 일상표현. 
 
--conformer-cn WER
--conformer-cn CER
+2. Naturalness에 대한 객관적인 평가를 위해 다음과 같은 가이드라인을 세웠다.
+	- 중국어는 성조(tone)이 중요하다. (1-4성)
+	- Tonal system (iambic, trochaic)
+	- 동음이의어 (같은 음, 다른 성조)
+	- Prosody 확인해야 한다.
 
-Sheet처럼 자동 평가를 진행해주는 연구도 진행중이다. 추측컨대 CMU에서도 발음평가에 대한 연구를 진행하는 것으로 알고 있다.
+3. Intelligibility는 CN-ASR pretrained 모델로 평가를 진행하였다.
+	- conformer-cn WER
+	- conformer-cn CER
+
+
+- E2E (one-stage) TTS는 학습 측면에서 편리하지만, 여러명의 화자가 필요한 상황에서는 보코더를 활용한 two-stage 모델이 더 유리할거라 생각된다.
+- Sheet처럼 자동 평가를 진행해주는 연구도 진행중이다. 추측컨대 CMU에서도 발음평가에 대한 연구를 진행하는 것으로 알고 있다.
+
+https://en.data-baker.com/datasets/freeDatasets/
