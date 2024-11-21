@@ -22,8 +22,10 @@ wav format with 48KHz 16bit
 ### 훈련 결과
 100 epochs
 Titan-Xp GPU 기준, 1h/epoch
-음성파일
 
+<audio controls>
+    <source src='/assets/files/2024-11-22-test.wav'>
+</audio>
 
 https://drive.google.com/drive/folders/1osLfIye7XqybgXssSfZQYU4OQKzeRcTY?usp=sharing
 
@@ -46,7 +48,6 @@ TTS 평가는 subjective human evaluation (Mean Opinion Score (MOS))으로 이�
 3. Intelligibility는 CN-ASR pretrained 모델로 평가를 진행하였다.
 	- conformer-cn WER
 	- conformer-cn CER
-
 
 - E2E (one-stage) TTS는 학습 측면에서 편리하지만, 여러명의 화자가 필요한 상황에서는 보코더를 활용한 two-stage 모델이 더 유리할거라 생각된다.
 - Sheet처럼 자동 평가를 진행해주는 연구도 진행중이다. 추측컨대 CMU에서도 발음평가에 대한 연구를 진행하는 것으로 알고 있다.
