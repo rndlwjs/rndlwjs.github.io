@@ -18,7 +18,7 @@ ASR 분야 여러가지 트랜스포머 변형 모델을 알아보는 것도 흥
     - Conformer의 sequential한 구조는 interpret, modify 하기 어려운 점이 있다.
     - fixed, interleaving pattern of self-attention and convolution may not always be optimal
     - self-attention has quadratic complexity w.r.t. the sequence length
-2. 이번 논문은 Branchformer[]의 merging module을 개선시킨 연구이다.
+2. 이번 논문은 Branchformer[Peng22]의 merging module을 개선시킨 연구이다.
     - Depth-wise 컨볼루션을 브랜치 병합에 활용하여 인접한 (adjacent) 특징을 반영하였다.
     - SE block을 도입하여 브랜치 병합 중, global 정보를 반영하고자 하였다.
 3. AED 모델 성능이 뛰어나며, CTC, transducer는 차후 적용한다고 한다.
@@ -58,13 +58,13 @@ $Y_{Merge} = (Y_{C} + Y_{D})W$
 #### Squeeze-and-Excitation
 SE-block은 global한 정보를 활용하는 모듈이다. 이를 병합 (merging) 과정에 포함한 것이 두번째 기여라고 한다.
 
-$\bar{y}_{D} = \frac{1}{T}\sum\limits_{t=1}^T y_{Dt}$
+[//]: # $\bar{y}_{D} = \frac{1}{T}\sum\limits_{t=1}^T y_{Dt}$
 
-$g = \sigma(MLP(\bar{y}_{D})) = \sigma(Swich(\bar{Y}_{D}W_{1})W_{2})$
+[//]: # $g = \sigma(MLP(\bar{y}_{D})) = \sigma(Swich(\bar{Y}_{D}W_{1})W_{2})$
 
-$Y_{D_i}' = g_{i} \odot Y_{D_{i}} \forall i \in \{1, \ldots, d\}$
+[//]: # $Y_{D_i}' = g_{i} \odot Y_{D_{i}} \forall i \in \{1, \ldots, d\}$
 
-$Y_{Merge} = (Y_{C} + Y_{D}')W$
+[//]: # $Y_{Merge} = (Y_{C} + Y_{D}')W$
 
 일반 SE block과의 차이점은 $Sigmoid$가 아닌 $Swish$ 활성함수를 사용했다는 점이다.
 
