@@ -7,7 +7,7 @@ use_math: true
 
 이번에는 VITS 모델(TTS)을 중국어 데이터로 훈련하는 과정을 기록한 포스트이다.
 
-VITS[Kim21] 모델은 e2e 방식으로 발화속도를(rhythm) 자연스럽게 표현할 수 있게 설계된 모델이다.
+VITS[Kim21] 모델은 E2E 방식으로 발화속도를(rhythm) 자연스럽게 표현할 수 있게 설계된 모델이다.
 이전 포스트에 VITS 논문 정리한게 있으니, 궁금한 내용이 있다면 참고하면 좋을거 같다.
 
 > 글쓴이는 중국에서 8년 유학 경험이 있으며, 전직장에서 중국어(CN) TTS 평가 업무를 맡았다.
@@ -18,6 +18,7 @@ VITS 모델 기반 CN-TTS에 대한 오픈소스가 있어, 이를 직접 훈련
 Chinese Mandarin Female Database
 12 hours
 wav format with 48KHz 16bit
+[데이터셋 링크] (https://en.data-baker.com/datasets/freeDatasets/)
 
 ### 훈련 결과
 100 epochs
@@ -27,7 +28,7 @@ Titan-Xp GPU 기준, 1h/epoch
     <source src='/assets/files/2024-11-22-test.wav'>
 </audio>
 
-https://drive.google.com/drive/folders/1osLfIye7XqybgXssSfZQYU4OQKzeRcTY?usp=sharing
+[TTS 결과] (https://drive.google.com/drive/folders/1osLfIye7XqybgXssSfZQYU4OQKzeRcTY?usp=sharing)
 
 ### 평가
 TTS 평가는 subjective human evaluation (Mean Opinion Score (MOS))으로 이루어진다.
@@ -49,7 +50,8 @@ TTS 평가는 subjective human evaluation (Mean Opinion Score (MOS))으로 이�
 	- conformer-cn WER
 	- conformer-cn CER
 
+
 - E2E (one-stage) TTS는 학습 측면에서 편리하지만, 여러명의 화자가 필요한 상황에서는 보코더를 활용한 two-stage 모델이 더 유리할거라 생각된다.
 - Sheet처럼 자동 평가를 진행해주는 연구도 진행중이다. 추측컨대 CMU에서도 발음평가에 대한 연구를 진행하는 것으로 알고 있다.
 
-https://en.data-baker.com/datasets/freeDatasets/
+[^scala] \[^scala]: https://en.data-baker.com/datasets/freeDatasets/
