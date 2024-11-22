@@ -18,7 +18,7 @@ VITS 모델 기반 CN-TTS에 대한 오픈소스가 있어, 이를 직접 훈련
 Chinese Mandarin Female Database
 12 hours
 wav format with 48KHz 16bit
-[데이터셋 링크] (https://en.data-baker.com/datasets/freeDatasets/)
+[데이터셋 링크](https://en.data-baker.com/datasets/freeDatasets/)
 
 ### 훈련 결과
 100 epochs
@@ -28,7 +28,7 @@ Titan-Xp GPU 기준, 1h/epoch
     <source src='/assets/files/2024-11-22-test.wav'>
 </audio>
 
-[TTS 결과] (https://drive.google.com/drive/folders/1osLfIye7XqybgXssSfZQYU4OQKzeRcTY?usp=sharing)
+[TTS 결과](https://drive.google.com/drive/folders/1osLfIye7XqybgXssSfZQYU4OQKzeRcTY?usp=sharing)
 
 ### 평가
 TTS 평가는 subjective human evaluation (Mean Opinion Score (MOS))으로 이루어진다.
