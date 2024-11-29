@@ -14,7 +14,7 @@ VITS[Kim+ `21] 모델은 E2E 방식으로 발화속도를(rhythm) 자연스럽�
 
 VITS 모델 기반 CN-TTS에 대한 오픈소스가 있어, 이를 직접 훈련시키고 평가해보고자 했다. 엑셀로 평가를 진행하였으며, 자세한 내용은 [TTS 결과](https://drive.google.com/drive/folders/1osLfIye7XqybgXssSfZQYU4OQKzeRcTY?usp=sharing) 에서 확인할 수 있다.
 
-### 데이터셋 test3
+### 데이터셋
 
 |Dataset|
 |:---|
@@ -23,38 +23,8 @@ VITS 모델 기반 CN-TTS에 대한 오픈소스가 있어, 이를 직접 훈련
 |wav format with 48KHz 16bit|
 |[데이터셋 링크](https://en.data-baker.com/datasets/freeDatasets/)|
 
-## test1
-
-| Dataset                         |
-|:--------------------------------|
-| Chinese Mandarin Female Database|
-| 12 hours                        |
-| wav format with 48KHz 16bit     |
-
-## test2
-
-<table>
-  <thead>
-    <tr>
-      <th>Dataset</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Chinese Mandarin Female Database</td>
-    </tr>
-    <tr>
-      <td>12 hours</td>
-    </tr>
-    <tr>
-      <td>wav format with 48KHz 16bit</td>
-    </tr>
-  </tbody>
-</table>
-
-
-
 ### 훈련 결과
+
 |Result|
 |:---|
 |100 epochs|
@@ -85,6 +55,7 @@ TTS 평가는 subjective human evaluation (Mean Opinion Score (MOS))으로 이�
 Naturalness는 5점 만점을 기준으로 하였다.
 
 #### 도메인별 Naturalness 평가
+
 | |잿말 놀이|게임|영화대사|일상표현|뉴스|**총평균**|
 |:---|:---|:---|:---|:---|:---|:---|
 |5점|7ea|11ea|11ea|9ea|2ea|-|
@@ -100,22 +71,21 @@ Naturalness는 5점 만점을 기준으로 하였다.
 
 #### 5점 미만 유형 분석
 오류유형1: 기계음
+
 |기계음|4점|3점|
 |:---|:---|:---|
 |노이즈|34ea|5ea|
 |끊김|4ea|-|
 
-<div class="table-container">
-
 오류유형2: 발음 오류
+
 |발음|4점|3점|
 |:---|:---|:---|
 |발음 오류|3ea|2ea|
 |성조 오류|2ea|-|
 
-</div>
-
 오류유형3: 속도
+
 |속도|4점|3점|
 |:---|:---|:---|
 |break 부재|5ea|2ea|
