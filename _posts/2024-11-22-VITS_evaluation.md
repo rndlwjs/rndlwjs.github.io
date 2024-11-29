@@ -14,7 +14,8 @@ VITS[Kim+ `21] 모델은 E2E 방식으로 발화속도를(rhythm) 자연스럽�
 
 VITS 모델 기반 CN-TTS에 대한 오픈소스가 있어, 이를 직접 훈련시키고 평가해보고자 했다. 엑셀로 평가를 진행하였으며, 자세한 내용은 [TTS 결과](https://drive.google.com/drive/folders/1osLfIye7XqybgXssSfZQYU4OQKzeRcTY?usp=sharing) 에서 확인할 수 있다.
 
-### 데이터셋
+### 데이터셋 test3
+
 |Dataset|
 |:---|
 |Chinese Mandarin Female Database|
