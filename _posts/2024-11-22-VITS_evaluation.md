@@ -22,6 +22,37 @@ VITS 모델 기반 CN-TTS에 대한 오픈소스가 있어, 이를 직접 훈련
 |wav format with 48KHz 16bit|
 |[데이터셋 링크](https://en.data-baker.com/datasets/freeDatasets/)|
 
+## test1
+
+| Dataset                         |
+|:--------------------------------|
+| Chinese Mandarin Female Database|
+| 12 hours                        |
+| wav format with 48KHz 16bit     |
+
+## test2
+
+<table>
+  <thead>
+    <tr>
+      <th>Dataset</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Chinese Mandarin Female Database</td>
+    </tr>
+    <tr>
+      <td>12 hours</td>
+    </tr>
+    <tr>
+      <td>wav format with 48KHz 16bit</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
 ### 훈련 결과
 |Result|
 |:---|
