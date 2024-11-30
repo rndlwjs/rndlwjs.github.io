@@ -16,8 +16,8 @@ ASR 분야 여러가지 트랜스포머 변형 모델을 알아보는 것도 흥
 ## 핵심요약
 1. Branchformer[Peng22]의 Conformer[Gulati20]와 차이점은 local, global branch를 parallel 하게 구조화한 점이다.
     - Conformer의 sequential한 구조는 interpret, modify 하기 어려운 점이 있다.
-    - fixed, interleaving pattern of self-attention and convolution may not always be optimal
-    - self-attention has quadratic complexity w.r.t. the sequence length
+    - 어텐션과 컨볼루션의 위치가 고정되었지만(fixed), 꼬여있는(interleaving) 패턴을 가지는 것은 바람직하지 않다고 한다.
+    - 어텐션은 이차(quadratic) 배수의 복잡도를 보인다. w.r.t. the sequence length
 2. 이번 논문은 Branchformer[Peng22]의 merging module을 개선시킨 연구이다.
     - Depth-wise 컨볼루션을 브랜치 병합에 활용하여 인접한 (adjacent) 특징을 반영하였다.
     - SE block을 도입하여 브랜치 병합 중, global 정보를 반영하고자 하였다.
@@ -47,7 +47,7 @@ Modifications of the merging module that take temporal information into account.
 #### Depth-wise convolution
 Depth-wise 컨볼루션은 인접한 특징 (adjacent feature)를 반영하면서, 연산량 혹은 속도의 큰 차이를 보이지 않는다.
 
-기존 Branchformer는 linear projection을 통과하여, 즉 채널 기준으로 병합되지만(fused), Inception-Transformer에서 제안된 것과 같이 depth-wise 컨볼루션을 활용하여 공간 정보를 보완할 수 있다고 한다.
+기존 Branchformer는 linear projection을 통과하여 채널 기준으로 병합되지만(fused), depth-wise 컨볼루션을 활용하면 공간 정보를 보완할 수 있다.
 
 $Y_{C} = Concat(Y_{G}, Y_{L})$
 
@@ -56,7 +56,7 @@ $Y_{D} = DwConv(Y_{C})$
 $Y_{Merge} = (Y_{C} + Y_{D})W$
 
 #### Squeeze-and-Excitation
-SE-block은 global한 정보를 활용하는 모듈이다. 이를 병합 (merging) 과정에 포함한 것이 두번째 기여라고 한다.
+SE-block은 global한 정보를 활용하는 모듈이다. 병합전, $\bar{Y}_{D}$ 에 SE-Block을 적용시켰다고 한다.
 
 [//]: # $\bar{y}_{D} = \frac{1}{T}\sum\limits_{t=1}^T y_{Dt}$
 
