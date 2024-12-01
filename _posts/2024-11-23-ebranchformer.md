@@ -7,9 +7,7 @@ use_math: true
 
 E-Branchformer[Kim22]는 음성인식 분야 SOTA모델 Conformer와 견주어 비교되는 모델이다.
 
-ASR 분야 여러가지 트랜스포머 변형 모델이 제안되었지만, CMU 대용량 음성모델 OWSM3.1 기본 구조로 사용되었다고 하여 공부를 결심하였다.
-
-*ICASSP2024 현장에서 OWSM3.1 세션을 감명 깊게 들었다.*
+ASR 분야 여러가지 트랜스포머 변형 모델이 제안되었지만, CMU 대용량 음성모델 OWSM3.1 기본 구조로 사용되었다고 하여 공부를 결심하였다. *(ICASSP2024 현장에서 OWSM3.1 세션을 감명 깊게 들었다.)*
 
 > 논문은 merging method, stacking additional point-wise module을 도입한 점에 기여를 하였다고 한다.
 
@@ -30,13 +28,16 @@ global extractor branch $Y_{G}$는 일반적인 트랜스포머 MHSA와 동일�
 
 $Y_{G}=Dropout(MHSA(LN(X)))$
 
-local extractor branch Y_{L}$는 4가지 모듈로 이루어져있다. 
+local extractor branch Y_{L}$는 4가지 모듈로 이루어져있다. CSGU에 [Sakuma+ '21]가 인용되어 있어, 해당 논문에서 아이디어를 차용한듯 하다. *(ICRL reject 당했지만, 음성 길이 관련된 아키텍처를 연구한 논문이라 읽어보는게 좋을듯 하다.)*
 
 LayerNorm, 6차원 특징 변환, GELU를 통과한 입력은 $dim$기준으로 특징 $A, B$ 두가지를 나눈다. 한가지 특징, 예를 들어 $A$에 LayerNorm과 Depthwise Conv를 통과시키고, 나머지 특징 $B$와 원소 곱셈을 해준다. *$U$, $V$는 linear projection이다.*
 
 $Z = GELU(LN(X)U)$
+
 $[A B] = Z$
+
 $\tilde{Z} = CSGU(Z) = A \odot DwConv(LN(B))$
+
 $Y_{L} = Dropout(\tilde{Z}V)$
 
 [espnet](https://github.com/espnet/espnet/blob/master/espnet2/asr/layers/cgmlp.py)을 참고하니, 다음과 같이 코드가 작성되어 있다.
@@ -69,12 +70,12 @@ def forward(self, x, gate_add=None):
     return out
 ```
 
-merge module은 간단하게 concat하고, linear를 통과시킨다.
+merge module은 간단하게 concat하고, linear $W$를 통과시킨다.
 
 $Y_{Merge} = Concat(Y_{G}, Y_{L})W$
 
 ### E-BRANCHFORMER
-Modifications of the merging module that take temporal information into account. (self-attention and convlution to be combined sequentially and in parallel)
+E-branchformer는 merging 모듈을 개선시켜, 시간(temporal) 정보를 더욱 반영하였다고 한다. 
 
 #### Depth-wise convolution
 Depth-wise 컨볼루션은 인접한 특징 (adjacent feature)를 반영하면서, 연산량 혹은 속도의 큰 차이를 보이지 않는다.
@@ -104,5 +105,3 @@ SE-block은 global한 정보를 활용하는 모듈이다. 병합전, $\bar{Y}_{
 Branchformer는 2개 cgMLP가 있지만, Transformer와 다르게 FFN은 사용하지 않는다. FFN은 시간 (temporal) 정보 aggregation 이후 개별적인 특징을 (pointwise) 정제하는 특징이 있다.
 
 트랜스포머는 MSHA와 FFN을 스택으로 특징을 처리하며, interleaving 패턴으로 쌓아올리는데, [55]에 따르면 random하게 하는게 낫다고 한다. 
-
-CMU에서 OpenAI whisper를 OWSM3.1이라는 모델로 재구현할 때 사용된 기본구조라고 한다.
