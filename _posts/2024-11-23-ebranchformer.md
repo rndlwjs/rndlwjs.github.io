@@ -26,18 +26,50 @@ ASR 분야 여러가지 트랜스포머 변형 모델이 제안되었지만, CMU
 ### BRANCHFORMER
 branchformer는 세 가지 구성이 포함된다. Attention (global)과 Local (cgMLP)를 concat 혹은 weighted average 방식으로 merge 시킨 아키텍쳐이다.
 
-global extractor branch
+global extractor branch $Y_{G}$는 일반적인 트랜스포머 MHSA와 동일하다.
 
 $Y_{G}=Dropout(MHSA(LN(X)))$
 
-local extractor branch
+local extractor branch Y_{L}$는 4가지 모듈로 이루어져있다. 
+
+LayerNorm, 6차원 특징 변환, GELU를 통과한 입력은 $dim$기준으로 특징 $A, B$ 두가지를 나눈다. 한가지 특징, 예를 들어 $A$에 LayerNorm과 Depthwise Conv를 통과시키고, 나머지 특징 $B$와 원소 곱셈을 해준다. *$U$, $V$는 linear projection이다.*
 
 $Z = GELU(LN(X)U)$
 $[A B] = Z$
 $\tilde{Z} = CSGU(Z) = A \odot DwConv(LN(B))$
 $Y_{L} = Dropout(\tilde{Z}V)$
 
-merge module
+[espnet](https://github.com/espnet/espnet/blob/master/espnet2/asr/layers/cgmlp.py)을 참고하니, 다음과 같이 코드가 작성되어 있다.
+
+```
+def forward(self, x, gate_add=None):
+    """Forward method
+
+    Args:
+        x (torch.Tensor): (N, T, D)
+        gate_add (torch.Tensor): (N, T, D/2)
+
+    Returns:
+        out (torch.Tensor): (N, T, D/2)
+    """
+
+    x_r, x_g = x.chunk(2, dim=-1)
+
+    x_g = self.norm(x_g)  # (N, T, D/2)
+    x_g = self.conv(x_g.transpose(1, 2)).transpose(1, 2)  # 변환 후 다시 (N, T, D/2)로 만든다
+    if self.linear is not None:
+        x_g = self.linear(x_g)
+
+    if gate_add is not None:
+        x_g = x_g + gate_add
+
+    x_g = self.act(x_g)     #act()는 nn.Identy()와 동일함
+    out = x_r * x_g  # (N, T, D/2)
+    out = self.dropout(out)
+    return out
+```
+
+merge module은 간단하게 concat하고, linear를 통과시킨다.
 
 $Y_{Merge} = Concat(Y_{G}, Y_{L})W$
 
