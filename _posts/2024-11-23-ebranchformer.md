@@ -7,9 +7,9 @@ use_math: true
 
 E-Branchformer[Kim22]는 음성인식 분야 SOTA모델 Conformer와 견주어 비교되는 모델이다.
 
-ASR 분야 여러가지 트랜스포머 변형 모델을 알아보는 것도 흥미롭겠지만, CMU 대용량 음성모델 OWSM3.1 기본 구조로 사용되었다고 하여 호기심을 불러 일으켰다.
+ASR 분야 여러가지 트랜스포머 변형 모델이 제안되었지만, CMU 대용량 음성모델 OWSM3.1 기본 구조로 사용되었다고 하여 공부를 결심하였다.
 
-*ICASSP2024 현장에서 세션을 너무 재밌게 들은 이유도 크다.*
+*ICASSP2024 현장에서 OWSM3.1 세션을 감명 깊게 들었다.*
 
 > 논문은 merging method, stacking additional point-wise module을 도입한 점에 기여를 하였다고 한다.
 
@@ -24,10 +24,10 @@ ASR 분야 여러가지 트랜스포머 변형 모델을 알아보는 것도 흥
 3. AED 모델 성능이 뛰어나며, CTC, transducer는 차후 적용한다고 한다.
 
 ### BRANCHFORMER
-branchformer는 세 가지 구성이 포함된다. global extractor branch, local extractor branch, merge module.
+branchformer는 세 가지 구성이 포함된다. Attention (global)과 Local (cgMLP)를 concat 혹은 weighted average 방식으로 merge 시킨 아키텍쳐이다.
 
 global extractor branch
-$Y_{G}=Dropout(MHSA(LN(X)))$
+$$Y_{G}=Dropout(MHSA(LN(X))) \tag{1}$$
 
 local extractor branch
 $Z = GELU(LN(X)U)$
