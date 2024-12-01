@@ -27,18 +27,18 @@ ASR 분야 여러가지 트랜스포머 변형 모델이 제안되었지만, CMU
 branchformer는 세 가지 구성이 포함된다. Attention (global)과 Local (cgMLP)를 concat 혹은 weighted average 방식으로 merge 시킨 아키텍쳐이다.
 
 global extractor branch
-$$Y_{G}=Dropout(MHSA(LN(X))) \tag{1}$$
+
+$Y_{G}=Dropout(MHSA(LN(X)))$
 
 local extractor branch
+
 $Z = GELU(LN(X)U)$
-
 $[A B] = Z$
-
 $\tilde{Z} = CSGU(Z) = A \odot DwConv(LN(B))$
-
 $Y_{L} = Dropout(\tilde{Z}V)$
 
 merge module
+
 $Y_{Merge} = Concat(Y_{G}, Y_{L})W$
 
 ### E-BRANCHFORMER
