@@ -11,6 +11,8 @@ ASR 분야 여러가지 트랜스포머 변형 모델이 제안되었지만, CMU
 
 > 논문은 merging method, stacking additional point-wise module을 도입한 점에 기여를 하였다고 한다.
 
+<img src="/assets/images/2024-11-23-ebranchformer.png" width="75%" height="75%">
+
 ## 핵심요약
 1. Branchformer[Peng22]의 Conformer[Gulati20]와 차이점은 local, global branch를 parallel 하게 구조화한 점이다.
     - Conformer의 sequential한 구조는 interpret, modify 하기 어려운 점이 있다.
@@ -28,7 +30,7 @@ global extractor branch $Y_{G}$는 일반적인 트랜스포머 MHSA와 동일�
 
 $Y_{G}=Dropout(MHSA(LN(X)))$
 
-local extractor branch Y_{L}$는 4가지 모듈로 이루어져있다. CSGU에 [Sakuma+ '21]가 인용되어 있어, 해당 논문에서 아이디어를 차용한듯 하다. *(ICRL reject 당했지만, 음성 길이 관련된 아키텍처를 연구한 논문이라 읽어보는게 좋을듯 하다.)*
+local extractor branch $Y_{L}$는 4가지 모듈로 이루어져있다. CSGU에 [Sakuma+ '21]가 인용되어 있어, 해당 논문에서 아이디어를 차용한듯 하다. *(ICRL reject 당했지만, 음성 길이 관련된 아키텍처를 연구한 논문이라 읽어보는게 좋을듯 하다.)*
 
 LayerNorm, 6차원 특징 변환, GELU를 통과한 입력은 $dim$기준으로 특징 $A, B$ 두가지를 나눈다. 한가지 특징, 예를 들어 $A$에 LayerNorm과 Depthwise Conv를 통과시키고, 나머지 특징 $B$와 원소 곱셈을 해준다. *$U$, $V$는 linear projection이다.*
 
