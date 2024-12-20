@@ -2,18 +2,20 @@
 layout: single
 title: '[paper] E-BRANCHFORMER: BRANCHFORMER WITH ENHANCED MERGING FOR SPEECH RECOGNITION'
 categories: 'ASR'
+tag: 'paper'
 use_math: true
+author_profile: false
 ---
 
 E-Branchformer[Kim22]는 음성인식 분야 SOTA모델 Conformer와 견주어 비교되는 모델이다.
 
-ASR 분야 여러가지 트랜스포머 변형 모델이 제안되었지만, CMU 대용량 음성모델 OWSM3.1 기본 구조로 사용되었다고 하여 공부를 결심하였다. *(ICASSP2024 현장에서 OWSM3.1 세션을 감명 깊게 들었다.)*
+ASR 분야 여러가지 트랜스포머 변형 모델이 제안되었지만, CMU 대용량 음성모델 OWSM3.1 기본 구조로 사용되었다고 하여 공부를 결심하였다. <span style="font-size: 14px;">*(ICASSP2024 현장에서 OWSM3.1 세션을 감명 깊게 들었다.)*</span>
 
-> 논문은 merging method, stacking additional point-wise module을 도입한 점에 기여를 하였다고 한다.
+> <span style="font-size: 14px;">논문은 merging method, stacking additional point-wise module을 도입한 점에 기여를 하였다고 한다.</span>
 
-<img src="/assets/images/2024-11-23-ebranchformer.png" width="75%" height="75%">
+![ebranchformer](/assets/images/2024-11-23-ebranchformer.png){: .align-center}
 
-## 핵심요약
+## Summary
 1. Branchformer[Peng22]의 Conformer[Gulati20]와 차이점은 local, global branch를 parallel 하게 구조화한 점이다.
     - Conformer의 sequential한 구조는 interpret, modify 하기 어려운 점이 있다.
     - 어텐션과 컨볼루션의 위치가 고정되었지만(fixed), 꼬여있는(interleaving) 패턴을 가지는 것은 바람직하지 않다고 한다.
@@ -28,23 +30,23 @@ branchformer는 세 가지 구성이 포함된다. Attention (global)과 Local (
 
 global extractor branch $Y_{G}$는 일반적인 트랜스포머 MHSA와 동일하다.
 
-$Y_{G}=Dropout(MHSA(LN(X)))$
+<span style="font-size: 12px;"> $Y_{G}=Dropout(MHSA(LN(X)))$ </span>
 
 local extractor branch $Y_{L}$는 4가지 모듈로 이루어져있다. CSGU에 [Sakuma+ '21]가 인용되어 있어, 해당 논문에서 아이디어를 차용한듯 하다. *(ICRL reject 당했지만, 음성 길이 관련된 아키텍처를 연구한 논문이라 읽어보는게 좋을듯 하다.)*
 
 LayerNorm, 6차원 특징 변환, GELU를 통과한 입력은 $dim$기준으로 특징 $A, B$ 두가지를 나눈다. 한가지 특징, 예를 들어 $A$에 LayerNorm과 Depthwise Conv를 통과시키고, 나머지 특징 $B$와 원소 곱셈을 해준다. *$U$, $V$는 linear projection이다.*
 
-$Z = GELU(LN(X)U)$
+<span style="font-size: 12px;"> $(1) Z = GELU(LN(X)U)$ </span>
 
-$[A B] = Z$
+<span style="font-size: 12px;"> $(2) [A B] = Z$ </span>
 
-$\tilde{Z} = CSGU(Z) = A \odot DwConv(LN(B))$
+<span style="font-size: 12px;"> $(3) \tilde{Z} = CSGU(Z) = A \odot DwConv(LN(B))$ </span>
 
-$Y_{L} = Dropout(\tilde{Z}V)$
+<span style="font-size: 12px;"> $(4) Y_{L} = Dropout(\tilde{Z}V)$ </span>
 
 [espnet](https://github.com/espnet/espnet/blob/master/espnet2/asr/layers/cgmlp.py)을 참고하니, 다음과 같이 코드가 작성되어 있다.
 
-```
+{% highlight python linenos mark_lines="1 2" %}
 def forward(self, x, gate_add=None):
     """Forward method
 
@@ -70,11 +72,11 @@ def forward(self, x, gate_add=None):
     out = x_r * x_g  # (N, T, D/2)
     out = self.dropout(out)
     return out
-```
+{% endhighlight %}
 
 merge module은 간단하게 concat하고, linear $W$를 통과시킨다.
 
-$Y_{Merge} = Concat(Y_{G}, Y_{L})W$
+<span style="font-size: 12px;"> $Y_{Merge} = Concat(Y_{G}, Y_{L})W$ </span>
 
 ### E-BRANCHFORMER
 E-branchformer는 merging 모듈을 개선시켜, 시간(temporal) 정보를 더욱 반영하였다고 한다. 
@@ -84,11 +86,11 @@ Depth-wise 컨볼루션은 인접한 특징 (adjacent feature)를 반영하면�
 
 기존 Branchformer는 linear projection을 통과하여 채널 기준으로 병합되지만(fused), depth-wise 컨볼루션을 활용하면 공간 정보를 보완할 수 있다.
 
-$Y_{C} = Concat(Y_{G}, Y_{L})$
+<span style="font-size: 12px;"> $Y_{C} = Concat(Y_{G}, Y_{L})$ </span>
 
-$Y_{D} = DwConv(Y_{C})$
+<span style="font-size: 12px;"> $Y_{D} = DwConv(Y_{C})$ </span>
 
-$Y_{Merge} = (Y_{C} + Y_{D})W$
+<span style="font-size: 12px;"> $Y_{Merge} = (Y_{C} + Y_{D})W$ </span>
 
 #### Squeeze-and-Excitation
 SE-block은 global한 정보를 활용하는 모듈이다. 병합전, $\bar{Y}_{D}$ 에 SE-Block을 적용시켰다고 한다.

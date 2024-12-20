@@ -3,6 +3,8 @@ layout: single
 title: '[실습] ECAPA-TDNN 모델을 활용한 화자분할 실험'
 categories: 'Speaker'
 use_math: true
+tag: '실습'
+author_profile: false
 ---
 
 이전 포스트를 참고하여 화자분할 실습을 진행하고자 한다.

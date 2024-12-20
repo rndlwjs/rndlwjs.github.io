@@ -3,6 +3,8 @@ layout: single
 title: '[실습] VITS 모델(TTS) 중국어 데이터 훈련 및 평가 실습'
 categories: 'TTS'
 use_math: true
+tag: '실습'
+author_profile: false
 ---
 
 이번에는 VITS 모델(TTS)을 중국어 데이터로 훈련한 과정을 기록한 포스트이다.
@@ -10,7 +12,7 @@ use_math: true
 VITS[Kim+ `21] 모델은 E2E 방식으로 발화속도를(rhythm) 자연스럽게 표현할 수 있게 설계된 모델이다.
 이전 포스트에 VITS 논문 정리한게 있으니, 궁금한 내용이 있다면 참고하면 좋을거 같다.
 
-> 글쓴이는 중국에서 8년 유학 경험이 있으며, 전직장에서 중국어(CN) TTS 평가 업무를 맡았다.
+> <span style="font-size: 14px;">글쓴이는 중국에서 8년 유학 경험이 있으며, 전직장에서 중국어(CN) TTS 평가 업무를 맡았다. </span>
 
 VITS 모델 기반 CN-TTS에 대한 오픈소스가 있어, 이를 직접 훈련시키고 평가해보고자 했다. 엑셀로 평가를 진행하였으며, 자세한 내용은 [TTS 결과](https://drive.google.com/drive/folders/1osLfIye7XqybgXssSfZQYU4OQKzeRcTY?usp=sharing) 에서 확인할 수 있다.
 
